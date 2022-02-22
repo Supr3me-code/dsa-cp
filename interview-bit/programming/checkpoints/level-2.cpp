@@ -1,8 +1,11 @@
 //Print concentric rectangular pattern in a 2d matrix. 
+#include<iostream>
+#include<vector>
+using namespace std;
 
-vector<vector<int>> prettyPrint(int A) {
+vector<vector<int> > prettyPrint(int A) {
     int n = (2*A)-1;                                            //dimension of the matrix
-    vector<vector<int>> result(n, vector<int>(n,0));            
+    vector<vector<int> > result(n, vector<int>(n,0));            
    
     
     for(int i=0;i<A;i++){
