@@ -5,13 +5,15 @@ int main(){
     int t;
     cin>>t;
     while(t--){
-        int x,y,m;
-        cin>>x>>y>>m;
+        int x,y;
+        cin>>x>>y;
+        
+        int m = y/x;
 
-        if(x*m<y){
-            cout<<"YES"<<endl;
+        if(y%x==0){
+            cout<<m-1<<endl;
         }else{
-            cout<<"NO"<<endl;
+            cout<<m<<endl;
         }
     }
     return 0;
