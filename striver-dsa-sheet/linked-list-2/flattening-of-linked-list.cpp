@@ -1,65 +1,62 @@
-/*
-// Definition for a Node.
-class Node {
-public:
-    int val;
-    Node* next;
-    Node* random;
-    
-    Node(int _val) {
-        val = _val;
-        next = NULL;
-        random = NULL;
+Node *merge(Node *first, Node *second)
+{
+    Node *head = new Node(-1);
+    head->bottom = NULL;
+    Node *temp = head;
+    while (first && second)
+    {
+        if (first->data < second->data)
+        {
+            temp->bottom = first;
+            first = first->bottom;
+        }
+        else
+        {
+            temp->bottom = second;
+            second = second->bottom;
+        }
+        temp = temp->bottom;
     }
-};
-*/
-
-class Solution {
-public:
-    Node* copyRandomList(Node* head) {
-        Node *iter = head; 
-          Node *front = head;
-
-          // First round: make copy of each node,
-          // and link them together side-by-side in a single list.
-          while (iter != NULL) {
-            front = iter->next;
-
-            Node *copy = new Node(iter->val);
-            iter->next = copy;
-            copy->next = front;
-
-            iter = front;
-          }
-
-          // Second round: assign random pointers for the copy nodes.
-          iter = head;
-          while (iter != NULL) {
-            if (iter->random != NULL) {
-              iter->next->random = iter->random->next;
-            }
-            iter = iter->next->next;
-          }
-
-          // Third round: restore the original list, and extract the copy list.
-          iter = head;
-          Node *pseudoHead = new Node(0);
-          Node *copy = pseudoHead;
-
-          while (iter != NULL) {
-            front = iter->next->next;
-
-            // extract the copy
-            copy->next = iter->next;
-
-            // restore the original list
-            iter->next = front;
-              
-            copy = copy -> next; 
-            iter = front;
-          }
-
-          return pseudoHead->next;
-        
+    if (first)
+    {
+        temp->bottom = first;
     }
-};
+    if (second)
+    {
+        temp->bottom = second;
+    }
+    return head->bottom;
+}
+
+Node *middle(Node *head)
+{
+    Node *slow = head;
+    Node *fast = head;
+
+    while (!fast->next && !fast->next->next)
+    {
+        fast = fast->next->next;
+        slow = slow->next;
+    }
+    return slow;
+}
+
+Node *mergeSort(Node *head)
+{
+    if (!head || !head->next)
+    {
+        return head;
+    }
+
+    Node *mid = middle(head);
+    Node *head2 = mid->next;
+    mid->next = NULL;
+
+    Node *first = mergeSort(head);
+    Node *second = mergeSort(head2);
+    return merge(first, second);
+}
+Node *flatten(Node *root)
+{
+    return mergeSort(root);
+}
