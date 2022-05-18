@@ -1,3 +1,7 @@
+// Given a list arr of N integers, print sums of all subsets in it.
+
+
+
 class Solution{
     public:
     void recur(int idx, int sum, vector<int> &sumArr, vector<int> &arr,int N){

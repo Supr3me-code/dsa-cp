@@ -1,3 +1,11 @@
+// Given a set of N jobs where each jobi has a deadline and profit associated with it.
+
+// Each job takes 1 unit of time to complete and only one job can be scheduled at a time. We earn the profit associated with job if and only if the job is completed by its deadline.
+
+// Find the number of jobs done and the maximum profit.
+
+// Note: Jobs will be given in the form (Jobid, Deadline, Profit) associated with that Job.
+
 class Solution{
     public:
     bool comparator(Job job1, Job job2){

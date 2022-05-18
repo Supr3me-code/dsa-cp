@@ -1,3 +1,7 @@
+// Given an array of integers A and an integer B.
+
+// Find the total number of subarrays having bitwise XOR of all elements equals to B.
+
 int Solution::solve(vector<int> &A, int B) {
     map<int, int> m;
     int count = 0;
