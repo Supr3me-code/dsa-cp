@@ -34,7 +34,7 @@ class Solution{
                 if(st.empty()) break;
                 node = st.top();
                 st.pop();
-                inorder.push_back(node);
+                inorder.push_back(node->val);
                 st.push(node->right);
             }
         }

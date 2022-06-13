@@ -27,3 +27,28 @@ public:
         return result;
     }
 };
+
+//iterative
+
+class Solution{
+    public:
+    vector<int> iterativePreorder(TreeNode* root){
+        stck<int> st;
+        vector<int> preorder;
+        if(root==NULL) return preorder;
+        TreeNode* node = root;
+        st.push(node);
+        while(!st.empty()){
+            node = st.top();
+            st.pop();
+            preorder.push_back(node);
+            if(node->right){
+                st.push(node->right);
+            }
+            if(node->left){
+                st.push(node->left);
+            }
+        }
+        return preorder;
+    }
+}
