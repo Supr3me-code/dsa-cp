@@ -1,23 +1,23 @@
-//time -> O(N) space->)(1)
-//uses threaded binary tree
+// time -> O(N) space->)(1)
+// uses threaded binary tree
 
-vector<int> morrisInorder(TreeNode* root){
+vector<int> morrisInorder(TreeNode* root) {
     vector<int> inorder;
     TreeNode* cur = root;
-    while(cur != NULL){
-        if(cur->left == NULL){
+    while (cur != NULL) {
+        if (cur->left == NULL) {
             inorder.push_back(cur->val);
             cur = cur->right;
-        }else{
+        } else {
             TreeNode* prev = cur->left;
-            while(prev->right && prev->right!=cur){
+            while (prev->right && prev->right != cur) {
                 prev = prev->right;
             }
 
-            if(prev->right == NULL){
+            if (prev->right == NULL) {
                 prev->right = cur;
                 cur = cur->left;
-            }else{
+            } else {
                 prev->right = NULL;
                 inorder.push_back(cur->val);
                 cur = cur->right;

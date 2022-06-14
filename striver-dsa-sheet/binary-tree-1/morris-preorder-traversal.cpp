@@ -1,24 +1,25 @@
-Supr3me-code/flutter_practi//time -> O(N) space->)(1)
-//uses threaded binary tree
+Supr3me - code / flutter_practi  // time -> O(N) space->)(1)
+                     // uses threaded binary tree
 
-vector<int> morrispreorder(TreeNode* root){
+                     vector<int>
+                     morrispreorder(TreeNode* root) {
     vector<int> preorder;
     TreeNode* cur = root;
-    while(cur != NULL){
-        if(cur->left == NULL){
+    while (cur != NULL) {
+        if (cur->left == NULL) {
             preorder.push_back(cur->val);
             cur = cur->right;
-        }else{
+        } else {
             TreeNode* prev = cur->left;
-            while(prev->right && prev->right!=cur){
+            while (prev->right && prev->right != cur) {
                 prev = prev->right;
             }
 
-            if(prev->right == NULL){
+            if (prev->right == NULL) {
                 prev->right = cur;
                 preorder.push_back(cur->val);
                 cur = cur->left;
-            }else{
+            } else {
                 prev->right = NULL;
                 cur = cur->right;
             }
