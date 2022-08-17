@@ -1,22 +1,22 @@
-// Given an array having both positive and negative integers. The task is to compute the length of the largest subarray with sum 0.
+// Given an array having both positive and negative integers. The task is to
+// compute the length of the largest subarray with sum 0.
 
-class Solution{
-    public:
-    int maxLen(vector<int>&A, int n){   
+class Solution {
+   public:
+    int maxLen(vector<int>& A, int n) {
         unordered_map<int, int> mp;
-       mp[0] = -1;
-       int mx = 0, sum = 0;
-       for(int i=0; i<n;i++)
-       {
-           sum += A[i];
-           if(mp.find(sum) != mp.end())
-           mx = max(mx, i-mp[sum]);
-           else
-           mp[sum] = i;
-       }
-       return mx;
-        
+        mp[0] = -1;
+        int mx = 0, sum = 0;
+        for (int i = 0; i < n; i++) {
+            sum += A[i];
+            if (mp.find(sum) != mp.end())
+                mx = max(mx, i - mp[sum]);
+            else
+                mp[sum] = i;
+        }
+        return mx;
     }
 };
 
-// whenever the cumulative sum occurs twice that means the numbers in between have a sum 0.
+// whenever the cumulative sum occurs twice that means the numbers in between
+// have a sum 0.
