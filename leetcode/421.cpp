@@ -2,6 +2,7 @@ class Solution {
    public:
     struct Node {
         Node* links[2];
+        bool flag;
 
         bool containsKey(int bit) { return links[bit] != NULL; }
         Node* get(int bit) { return links[bit]; }
