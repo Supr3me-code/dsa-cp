@@ -1,37 +1,38 @@
-#include <iostream>
+#include <bits/stdc++.h>
+
 using namespace std;
-
-void addToStack(vector<int> &st, int num) {}
-
-int main() {
+class Stack {
     int size;
-    cout << "enter the size of the stack" << endl;
-    cin >> size;
-    vector<int> st(size);
-    cout << "List of operations:\n1. add a number\n2. display top\n3.remove "
-            "topmost number\n4. print stack (top first)\n";
-    int response;
-    cin >> response;
-    switch (response) {
-        case 1: {
-            cout << "enter the number to be added" << endl;
-            int num;
-            cin >> num;
-            addToStack(st, num);
-            break;
-        }
-        case 2: {
-            cout << diplayTop() << endl;
-            break;
-        }
-        case 3: {
-            cout << removeTop() << endl;
-            break;
-        }
-        case 4: {
-            displayStack();
-            break;
-        }
+    int* arr;
+    int top;
+
+   public:
+    Stack() {
+        top = -1;
+        size = 1000;
+        arr = new int[size];
     }
+    void push(int x) {
+        top++;
+        arr[top] = x;
+    }
+    int pop() {
+        int x = arr[top];
+        top--;
+        return x;
+    }
+    int Top() { return arr[top]; }
+    int Size() { return top + 1; }
+};
+int main() {
+    Stack s;
+    s.push(6);
+    s.push(3);
+    s.push(7);
+    cout << "Top of stack is before deleting any element " << s.Top() << endl;
+    cout << "Size of stack before deleting any element " << s.Size() << endl;
+    cout << "The element deleted is " << s.pop() << endl;
+    cout << "Size of stack after deleting an element " << s.Size() << endl;
+    cout << "Top of stack after deleting an element " << s.Top() << endl;
     return 0;
 }
