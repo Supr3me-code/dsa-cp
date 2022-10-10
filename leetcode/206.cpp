@@ -1,13 +1,13 @@
 class Solution {
-public:
+   public:
     ListNode* reverseList(ListNode* head) {
-        if(head){
+        if (head) {
             ListNode* prev = head;
-            if(head->next){
+            if (head->next) {
                 ListNode* curr = head->next;
-                if(head->next->next){
+                if (head->next->next) {
                     ListNode* ahead = head->next->next;
-                    while(ahead){
+                    while (ahead) {
                         curr->next = prev;
                         prev = curr;
                         curr = ahead;
@@ -16,15 +16,15 @@ public:
                     curr->next = prev;
                     head->next = NULL;
                     return curr;
-                }else{
+                } else {
                     curr->next = prev;
                     prev->next = NULL;
                     return curr;
                 }
-            }else{
+            } else {
                 return head;
             }
-        }else{
+        } else {
             return NULL;
         }
     }
