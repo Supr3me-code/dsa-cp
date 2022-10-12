@@ -13,7 +13,7 @@ int main() {
             cin >> arr[i];
         }
         ll res = arr[0];
-        for (ll i = 0; i < n - 1; i++) {
+        for (ll i = 0; i < n; i++) {
             res = __gcd(res, arr[i]);
         }
         cout << res * n << endl;
