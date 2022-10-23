@@ -63,7 +63,10 @@
         "vector": "cpp",
         "__bits": "cpp",
         "xutility": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "deque": "cpp",
+        "list": "cpp",
+        "random": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }
