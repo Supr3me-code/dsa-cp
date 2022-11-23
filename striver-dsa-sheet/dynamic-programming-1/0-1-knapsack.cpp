@@ -1,50 +1,34 @@
 // MEMOIZATION
 
-int dp[601][101][101] = {};
-
-int sub(vector<pair<int, int>>& a, int index, int nOnes, int nZeros) {
-    int n = a.size();
-    if (index == n or (nZeros == 0 and nOnes == 0)) return 0;
-
-    // if we already know answer for this index with current nZeros , nOnes then
-    // no need to recompute return the saved answer
-    if (dp[index][nOnes][nZeros] != -1) return dp[index][nOnes][nZeros];
-
-    // we dont have available no of zeros or ones to build this curent string,
-    // so we dont have any other option but to skip this index
-    if (a[index].first > nOnes or a[index].second > nZeros)
-        return dp[index][nOnes][nZeros] = sub(a, index + 1, nOnes, nZeros);
-    // NOTE : we are also saving corrensponding values
-
-    int include =
-        1 + sub(a, index + 1, nOnes - a[index].first, nZeros - a[index].second);
-    int exclude = sub(a, index + 1, nOnes, nZeros);
-
-    // save these values and return the answer
-    return dp[index][nOnes][nZeros] = max(include, exclude);
+int dp[1001][1001];
+int helper(vector<int> &values, vector<int> &weights, int n, int w) {
+    if (w == 0 || n == 0) return 0;
+    if (dp[n][w] != -1) return dp[n][w];
+    if (weights[n - 1] <= w) {
+        return dp[n][w] = max(values[n - 1] + helper(values, weights, n - 1,
+                                                     w - weights[n - 1]),
+                              helper(values, weights, n - 1, w));
+    } else {
+        return dp[n][w] = helper(values, weights, n - 1, w);
+    }
 }
 
-int findMaxForm(vector<string>& strs, int nZeros, int nOnes) {
-    vector<pair<int, int>> a;
-    memset(dp, -1, sizeof(dp));
-
-    for (auto i : strs) {
-        int one = 0, zero = 0;
-        for (auto j : i) (j == '1') ? one++ : zero++;
-        a.push_back({one, zero});
+int maxProfit(vector<int> &values, vector<int> &weights, int n, int w) {
+    for (int i = 0; i < n + 1; i++) {
+        for (int j = 0; j < w + 1; j++) {
+            dp[i][j] = -1;
+        }
     }
-
-    int ans = sub(a, 0, nOnes, nZeros);
-    return ans;
+    return helper(values, weights, n, w);
 }
 
 // TABULAR
 
-int findMaxForm(vector<string>& strs, int m, int n) {
+int findMaxForm(vector<string> &strs, int m, int n) {
     int i, j, k, l, p = strs.size();
     vector<vector<int>> dp(m + 1, vector<int>(n + 1));
 
-    for (auto& s : strs) {
+    for (auto &s : strs) {
         int x = count(s.begin(), s.end(), '1');
         int y = s.size() - x;
 
