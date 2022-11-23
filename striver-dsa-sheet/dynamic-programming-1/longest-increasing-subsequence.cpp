@@ -14,4 +14,45 @@ class Solution {
         return dp[prev_i + 1] = max(take, dontTake);
     }
 };
-vtm
+
+int longestIncreasingSubsequence(int arr[], int n) {
+    // dp[i] represents i+1'th length LIS ending at minimum integer dp[i]
+    int dp[n];
+    // Base case
+    dp[0] = 1;
+    int ans = 1;
+    for (int i = 1; i < n; i++) {
+        int maxval = 0;
+        for (int j = 0; j < i; j++) {
+            if (arr[i] > arr[j]) {
+                maxval = max(maxval, dp[j]);
+            }
+        }
+        dp[i] = maxval + 1;
+        ans = max(ans, dp[i]);
+    }
+    return ans;
+}
+
+// binary search + dp
+int longestIncreasingSubsequence(int arr[], int n) {
+    int dp[n];  // dp[i] represents i+1'th length LIS ending at minimum integer
+                // dp[i]
+    int ans = 0;
+    for (int i = 0; i < n; i++) {
+        /*
+            Since dp array stores elements in the sorted order therefore
+            we can use binary search to find the correct position for
+            arr[i] to be placed.
+            And elements are present in the dp array from 0 to ans-1 position
+            So we will be doing the binary search in this range.
+        */
+        int position = lower_bound(dp, dp + ans, arr[i]) - dp;
+        dp[position] = arr[i];
+        if (position == ans) {
+            ans++;
+        }
+    }
+
+    return ans;
+}
