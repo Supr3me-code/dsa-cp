@@ -1,0 +1,12 @@
+int n;
+cin >> n;
+int a, b, x, y;
+cin >> a >> b >> x >> y;
+int l1 = min(x, n - x + 1);
+int l2 = min(y, n - y + 1);
+int iu = min(a, n - a + 1);
+int il = min(b, n - b + 1);
+int curr1 = min(iu, il);
+int curr2 = min(l2, l1);
+curr1 += curr2;
+cout << min(abs(x - a) + abs(y - b), curr1) << endl;
