@@ -1,4 +1,5 @@
-// Given the head of a linked list, remove the nth node from the end of the list and return its head.
+// Given the head of a linked list, remove the nth node from the end of the list
+// and return its head.
 
 /**
  * Definition for singly-linked list.
@@ -11,32 +12,49 @@
  * };
  */
 class Solution {
-public:
+   public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
-        
         ListNode* lengthNode = head;
         int length = 0;
-        while(lengthNode){
+        while (lengthNode) {
             lengthNode = lengthNode->next;
             length++;
         }
-        
-        if(length==n){
+
+        if (length == n) {
             head = head->next;
             return head;
         }
-        
-        if(length==1){
+
+        if (length == 1) {
             return NULL;
         }
-        
+
         int x = length - n - 1;
         ListNode* jump = head;
-        while(x--){
+        while (x--) {
             jump = jump->next;
         }
         jump->next = jump->next->next;
-        
+
         return head;
     }
 };
+
+ListNode* removeNthFromEnd(ListNode* head, int n) {
+    ListNode* start = new ListNode();
+    start->next = head;
+    ListNode* fast = start;
+    ListNode* slow = start;
+
+    for (int i = 1; i <= n; ++i) fast = fast->next;
+
+    while (fast->next != NULL) {
+        fast = fast->next;
+        slow = slow->next;
+    }
+
+    slow->next = slow->next->next;
+
+    return start->next;
+}

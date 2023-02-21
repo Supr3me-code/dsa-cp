@@ -8,18 +8,14 @@ int Solution::solve(vector<int> &A, int B) {
     int xorr = 0;
 
     for(auto x:A){
-        xorr ^= x;
-        
+        xorr ^= x; 
         if(xorr == B){
             count++;
         }
-
         if(m.find(xorr^B)!=m.end()){
             count += m[xorr^B];
         }
-
-        m[xorr] += 1;
-        
+        m[xorr] += 1;   
     }
 
     return count;
