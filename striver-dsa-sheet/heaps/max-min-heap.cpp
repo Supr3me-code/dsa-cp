@@ -1,26 +1,64 @@
-void heapify(vector<int> &arr, int n, int i) {
-    int smallest = i;
-    int right = 2 * i + 2;
-    int left = 2 * i + 1;
+void heapify(vector<int> &heap, int k, int &size) {
+    int l = (2 * k) + 1;
+    int r = (2 * k) + 2;
+    int smallest = k;
 
-    if (left < n && arr[smallest] > arr[left]) {
-        smallest = left;
+    if (l < size && heap[l] < heap[k]) {
+        smallest = l;
     }
-    if (right < n && arr[smallest] > arr[right]) {
-        smallest = right;
+    if (r < size && heap[r] < heap[smallest]) {
+        smallest = r;
     }
-
-    if (smallest != i) {
-        swap(arr[i], arr[smallest]);
-        heapify(arr, n, smallest);
+    if (smallest != k) {
+        int temp = heap[k];
+        heap[k] = heap[smallest];
+        heap[smallest] = temp;
+        heapify(heap, smallest, size);
     }
 }
 
-vector<int> buildMinHeap(vector<int> &arr) {
-    int n = arr.size();
-    for (int i = n / 2; i >= 0; i--) {
-        heapify(arr, n, i);
+int getMin(vector<int> &heap, int &size) {
+    if (size == 1) {
+        size -= 1;
+        return heap[0];
     }
-    return arr;
-    // Write your code here
+
+    int ans = heap[0];
+
+    heap[0] = heap[size - 1];
+    size--;
+
+    heapify(heap, 0, size);
+
+    return ans;
+}
+
+void insert(vector<int> &heap, int val, int &size) {
+    heap[size] = val;
+
+    int i = size;
+    size++;
+
+    while (i != 0 && heap[(i - 1) / 2] > heap[i]) {
+        swap(heap[i], heap[(i - 1) / 2]);
+        i = (i - 1) / 2;
+    }
+}
+
+vector<int> minHeap(int n, vector<vector<int>>& q) {
+    // Write your code here.
+    int size = 0;
+
+    vector<int> heap(n);
+    vector<int> ans;
+
+    for(int i=0;i<n;i++){
+        if(q[i][0] == 0){
+            insert(heap, q[i][1], size);
+        }else{
+            ans.push_back(getMin(heap, size));
+        }
+    }
+
+    return ans;
 }
